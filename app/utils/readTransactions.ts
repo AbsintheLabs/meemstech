@@ -7,26 +7,34 @@ export const getBuyPriceAfterFee = async (
   subjectAddress: string,
   amt: string
 ) => {
-  const response = await publicClient.readContract({
-    address: CONTRACT_ADDRESS,
-    abi: memecoinAbi,
-    functionName: "getBuyPriceAfterFee",
-    args: [subjectAddress, amt]
-  });
+  try {
+    const response = await publicClient.readContract({
+      address: CONTRACT_ADDRESS,
+      abi: memecoinAbi,
+      functionName: "getBuyPriceAfterFee",
+      args: [subjectAddress, Number(amt)]
+    });
 
-  return response;
+    return response;
+  } catch (error) {
+    return 0;
+  }
 };
 
 export const getSellPriceAfterFee = async (
   subjectAddress: string,
   amt: string
 ) => {
-  const response = await publicClient.readContract({
-    address: CONTRACT_ADDRESS,
-    abi: memecoinAbi,
-    functionName: "getSellPriceAfterFee",
-    args: [subjectAddress, amt]
-  });
+  try {
+    const response = await publicClient.readContract({
+      address: CONTRACT_ADDRESS,
+      abi: memecoinAbi,
+      functionName: "getSellPriceAfterFee",
+      args: [subjectAddress, amt]
+    });
 
-  return response;
+    return response;
+  } catch (error) {
+    return 0;
+  }
 };

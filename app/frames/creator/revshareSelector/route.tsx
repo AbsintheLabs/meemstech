@@ -5,8 +5,7 @@ import { processImages } from "../../../utils/processImages";
 
 const frames = createFrames({
   basePath: "/frames",
-  initialState: {
-  },
+  initialState: {}
 });
 
 const handleRequest = frames(async (ctx) => {
@@ -16,47 +15,45 @@ const handleRequest = frames(async (ctx) => {
   const nameSelector = ctx.searchParams.nameSelector || "name";
   // process images to make it square and compatible with frames
   const [processedImageUrl] = await processImages([selectedImageUrl]);
-  const textPrompt = nameSelector === "name" ? "name of meme (ex: dogwifhat)" : "ticker of meme (ex: WIF)";
-  console.log("selectedImageUrl", selectedImageUrl)
+  const textPrompt =
+    nameSelector === "name"
+      ? "name of meme (ex: dogwifhat)"
+      : "ticker of meme (ex: WIF)";
+  console.log("selectedImageUrl", selectedImageUrl);
 
   return {
     image: (
       // TODO: explain how the user can add handles here and for what
-      <div tw="flex flex-col">
-        <img width={220} height={220} src={processedImageUrl} alt="Image" />
-        <div tw="flex">
-          revshare selector screen
-        </div>
+      <div tw='flex flex-col'>
+        <img width={220} height={220} src={processedImageUrl} alt='Image' />
+        <div tw='flex'>revshare selector screen</div>
       </div>
     ),
     buttons: [
       <Button
-        key="next"
-        action="post"
+        key='next'
+        action='post'
         target={{
           query: {},
-          pathname: "/creator/revshareSelector",
+          pathname: "/creator/revshareSelector"
         }}
       >
         Add Handle
-      </Button >,
+      </Button>,
       <Button
-        key="next"
-        action="post"
+        key='next'
+        action='tx'
         target={{
           query: {},
-          pathname: "/creator/revshareSelector",
+          pathname: "/create"
         }}
       >
         Launch Meme
-      </Button >,
-
+      </Button>
     ],
-    textInput: 'add handle here (ex: @absinthe)',
+    textInput: "add handle here (ex: @absinthe)"
   };
 });
 
 export const GET = handleRequest;
 export const POST = handleRequest;
-
-
