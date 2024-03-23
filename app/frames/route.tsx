@@ -58,26 +58,16 @@ const handleRequest = frames(async (ctx) => {
       </Button>,
       <Button
         key='next'
-        action='tx'
+        action='post'
         target={{
-          query: { address: "0x5aC09Ca0865B5492a82460acb43ce658Ea6163D2" },
-          pathname: buyTxRoute
+          query: {},
+          pathname: imgCompareRoute
         }}
       >
-        Buy Shares
+        Search from textbox
       </Button>
-      // <Button
-      //   key='next'
-      //   action='post'
-      //   target={{
-      //     query: {},
-      //     pathname: imgCompareRoute
-      //   }}
-      // >
-      //   Search from textbox
-      // </Button>
     ],
-    textInput: "amount to buy"
+    textInput: "search with text input"
   };
 });
 

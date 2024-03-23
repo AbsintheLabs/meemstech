@@ -5,12 +5,12 @@ export async function POST(req: NextRequest): Promise<NextResponse<any>> {
   try {
     const json = await req.json();
 
-    const { inputText: amount, address } = json.untrustedData;
+    const { address } = json.untrustedData;
 
     return NextResponse.json(
       buyShares({
         address,
-        amount
+        amount: 1
       })
     );
   } catch (error) {
