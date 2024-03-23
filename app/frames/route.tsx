@@ -1,9 +1,8 @@
-import { getFrameMessage } from "frames.js";
 import { createFrames, Button } from "frames.js/next";
 
 const totalPages = 10;
 
-export const frames = createFrames({
+const frames = createFrames({
   basePath: "/frames",
   initialState: {
     pageIndex: 0,

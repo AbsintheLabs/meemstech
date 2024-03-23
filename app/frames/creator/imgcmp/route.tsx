@@ -1,12 +1,10 @@
 import { createFrames, Button } from "frames.js/next";
 import googleImageSearch from "../../../utils/searchUtils";
 import Image from "next/image";
-import sharp from "sharp";
+import { processImages } from "../../../utils/processImages";
 import fetch from "node-fetch";
 
-const totalPages = 10;
-
-export const frames = createFrames({
+const frames = createFrames({
   basePath: "/frames",
   initialState: {
     carouselIndex: 0,
@@ -14,38 +12,6 @@ export const frames = createFrames({
     searchedUrls: [] as string[],
   },
 });
-
-const processImages = async (imageUrls: string[]) => {
-  const images = await Promise.all(
-    imageUrls.map(async (url) => {
-      try {
-        if (url.startsWith("data:")) return "data:image/png;base64,";
-        const repsonse = await fetch(url);
-        const buffer = await repsonse.arrayBuffer();
-        const image = sharp(buffer);
-        const { width, height } = await image.metadata();
-        const safeWidth = Math.floor(width || 0);
-        const safeHeight = Math.floor(height || 0);
-        const squareSize = Math.min(safeWidth, safeHeight);
-        const extractedImage = await image.extract({
-          left: Math.floor((safeWidth - squareSize) / 2),
-          top: Math.floor((safeHeight - squareSize) / 2),
-          width: squareSize,
-          height: squareSize,
-        }).toBuffer();
-        const resizedImage = await sharp(extractedImage).resize(150, 150).png().toBuffer();;
-
-        return 'data:image/png;base64,' + resizedImage.toString("base64");
-      } catch (error) {
-        console.error("There was a problem with the fetch operation:", error);
-        console.log("error is with this link:", url)
-
-        {/* return "https://s.yimg.com/ny/api/res/1.2/zpJgEgEIHJtNCmm6FTBxBg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD02NzU-/https://media.zenfs.com/en/coindesk_75/76b14eac02234187ef0d5485201e978e"; */ }
-      }
-    })
-  );
-  return images;
-};
 
 
 async function filterImageUrls(imageUrls: string[]): Promise<string[]> {
@@ -86,6 +52,7 @@ const handleRequest = frames(async (ctx) => {
     ctx.state.searchedUrls = [];
   }
 
+
   let allSearchedImageUrls = [];
   let filteredImageUrls = [];
   console.log("ctx.params", ctx.searchParams.urls)
@@ -122,11 +89,13 @@ const handleRequest = frames(async (ctx) => {
       </div>
     ),
     buttons: [
+      // we can pass the image link to the next route and preprocess it there again too
       <Button
         key="next"
         action="post"
         target={{
-          query: { pageIndex: (pageIndex - 1) % totalPages },
+          query: { selectedUrl: searchedImageUrls[0], nameSelector: "name" },
+          pathname: "/creator/memeDetails",
         }}
       >
         Pick Left
@@ -135,7 +104,8 @@ const handleRequest = frames(async (ctx) => {
         key="next"
         action="post"
         target={{
-          query: { pageIndex: (pageIndex - 1) % totalPages },
+          query: { selectedUrl: searchedImageUrls[1], nameSelector: "name" },
+          pathname: "/creator/memeDetails",
         }}
       >
         Pick Right
@@ -148,20 +118,19 @@ const handleRequest = frames(async (ctx) => {
           pathname: "/creator/imgcmp",
         }}
       >
-        Give diff meme pics
+        Next Meme Image
       </Button>,
       <Button
         key="next"
         action="post"
         target={{
-          query: { pageIndex: (pageIndex - 1) % totalPages },
+          query: {},
           pathname: "/"
         }}
       >
         Go back
       </Button>,
     ],
-    textInput: "search for funni meme 🔎",
   };
 });
 
