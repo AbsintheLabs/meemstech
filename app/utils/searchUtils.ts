@@ -16,14 +16,14 @@ type GoogleImageSearchResponse = {
   }>;
 };
 
-export default async function googleImageSearch(query: string): Promise<string[]> {
+export default async function googleImageSearch(query: string, upToNumber: number = 0): Promise<string[]> {
   if (!GOOGLE_API_KEY || !GOOGLE_CSE_ID) {
     throw new Error("Google API key or Custom Search Engine ID is not set");
   }
 
   const url = `https://www.googleapis.com/customsearch/v1?q=${encodeURIComponent(
     query
-  )}&cx=${GOOGLE_CSE_ID}&searchType=image&key=${GOOGLE_API_KEY}&num=2`;
+  )}&cx=${GOOGLE_CSE_ID}&searchType=image&key=${GOOGLE_API_KEY}&num=10`;
 
   try {
     const response = await fetch(url);

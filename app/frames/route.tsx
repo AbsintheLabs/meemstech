@@ -7,12 +7,15 @@ export const frames = createFrames({
   basePath: "/frames",
   initialState: {
     pageIndex: 0,
+    searchedUrls: [] as string[],
   },
 });
 
 const handleRequest = frames(async (ctx) => {
   const pageIndex = Number(ctx.searchParams.pageIndex || 0);
+  ctx.state.searchedUrls = [];
 
+  console.log(ctx.state)
   const imageUrl = `https://picsum.photos/seed/frames.js-${pageIndex}/300/200`;
   const suggestions = ["Bogdanoff", "Elon Musk"];
   const imgCompareRoute = "/creator/imgcmp";
