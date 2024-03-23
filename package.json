@@ -16,6 +16,7 @@
     "node-fetch": "^3.3.2",
     "react": "^18",
     "react-dom": "^18",
+    "sharp": "^0.33.2",
     "ts-node": "^10.9.2"
   },
   "devDependencies": {

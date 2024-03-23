@@ -1,3 +1,4 @@
+import { getFrameMessage } from "frames.js";
 import { createFrames, Button } from "frames.js/next";
 
 const totalPages = 10;
@@ -58,7 +59,8 @@ const handleRequest = frames(async (ctx) => {
         key="next"
         action="post"
         target={{
-          query: { pageIndex: (pageIndex - 1) % totalPages },
+          query: {},
+          pathname: imgCompareRoute,
         }}
       >
         Search from textbox

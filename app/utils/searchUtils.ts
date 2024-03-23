@@ -7,6 +7,8 @@ dotenv.config();
 const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
 const GOOGLE_CSE_ID = process.env.GOOGLE_CSE_ID;
 
+console.log("able to get api keys")
+
 // Define a type for the expected response to ensure type-safety.
 type GoogleImageSearchResponse = {
   items: Array<{
