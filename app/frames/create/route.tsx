@@ -7,12 +7,12 @@ export async function POST(req: NextRequest): Promise<NextResponse<any>> {
 
     const { address } = json.untrustedData;
 
-    return NextResponse.json(
-      buyShares({
-        address,
-        amount: 1
-      })
-    );
+    const tx = await buyShares({
+      address,
+      amount: 1
+    });
+
+    return NextResponse.json(tx);
   } catch (error) {
     console.error(error);
     return NextResponse.json({});
