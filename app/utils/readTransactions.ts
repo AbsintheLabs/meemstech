@@ -3,6 +3,21 @@ import { publicClient } from "./publicClient";
 
 const CONTRACT_ADDRESS = "0x331Fe061948E52CD96cF49E0a2fEBc4cd22a5F62";
 
+export const getBuyPrice = async (subjectAddress: string) => {
+  try {
+    const response = await publicClient.readContract({
+      address: CONTRACT_ADDRESS,
+      abi: memecoinAbi,
+      functionName: "getBuyPrice",
+      args: [subjectAddress, 1]
+    });
+
+    return response;
+  } catch (error) {
+    return 0;
+  }
+};
+
 export const getBuyPriceAfterFee = async (
   subjectAddress: string,
   amt: string

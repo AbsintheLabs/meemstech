@@ -1,5 +1,5 @@
 import { memecoinAbi } from "../abi/memecoinAbi";
-import { encodeFunctionData, parseEther } from "viem";
+import { encodeFunctionData } from "viem";
 import { getBuyPriceAfterFee, getSellPriceAfterFee } from "./readTransactions";
 
 const CONTRACT_ADDRESS = "0x331Fe061948E52CD96cF49E0a2fEBc4cd22a5F62";
@@ -23,7 +23,7 @@ export const buyShares = async (data: any) => {
         abi: memecoinAbi,
         to: CONTRACT_ADDRESS,
         data: encodedData,
-        value: buyPrice
+        value: Number(buyPrice)
       }
     };
   } catch (error) {
@@ -51,7 +51,7 @@ export const sellShares = async (data: any) => {
         to: CONTRACT_ADDRESS,
         data: encodedData
       },
-      value: sellPrice
+      value: Number(sellPrice)
     };
   } catch (error) {
     console.error(error);
