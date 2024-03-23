@@ -18,7 +18,6 @@ const handleRequest = frames(async (ctx) => {
   const imageUrl = `https://picsum.photos/seed/frames.js-${pageIndex}/300/200`;
   const suggestions = ["Bogdanoff", "Elon Musk"];
   const imgCompareRoute = "/creator/imgcmp";
-  const buyTxRoute = "/buy";
 
   return {
     image: (
