@@ -15,11 +15,23 @@ const handleRequest = frames(async (ctx) => {
   const nameSelector = ctx.searchParams.nameSelector || "name";
   // process images to make it square and compatible with frames
   const [processedImageUrl] = await processImages([selectedImageUrl]);
-  const textPrompt =
-    nameSelector === "name"
-      ? "name of meme (ex: dogwifhat)"
-      : "ticker of meme (ex: WIF)";
+  console.log("---", ctx.searchParams)
   console.log("selectedImageUrl", selectedImageUrl);
+  const stateObj = {
+    selectedUrl: ctx.searchParams.selectedUrl,
+    name: ctx.searchParams.name,
+    // default to the query param unless it exists from the prev frame input text
+    ticker: ctx.searchParams.ticker || ctx.message?.inputText,
+    benefactors: (ctx.searchParams.benefactors || []) as string[]
+  }
+
+  // add the inputText to the benefactors array if it's not the first time
+  if (ctx.searchParams.notFirstTime) {
+    stateObj.benefactors.push(ctx.message?.inputText || "")
+  }
+
+
+  console.log("$$$", stateObj)
 
   return {
     image: (
@@ -34,7 +46,7 @@ const handleRequest = frames(async (ctx) => {
         key='next'
         action='post'
         target={{
-          query: {},
+          query: { ...stateObj, notFirstTime: true },
           pathname: "/creator/revshareSelector"
         }}
       >

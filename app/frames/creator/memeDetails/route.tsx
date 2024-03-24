@@ -6,6 +6,11 @@ import { processImages } from "../../../utils/processImages";
 const frames = createFrames({
   basePath: "/frames",
   initialState: {
+    memeCreatorDetails: {
+      name: "",
+      ticker: "",
+      benefactors: [] as string[],
+    }
   },
 });
 
@@ -20,6 +25,16 @@ const handleRequest = frames(async (ctx) => {
   console.log("selectedImageUrl", selectedImageUrl)
   // only move on to the next route if the user has entered a ticker
   const nextPathname = nameSelector === "name" ? "/creator/memeDetails" : "/creator/revshareSelector";
+
+  // imgcmp -> memeDetails (with only selectedUrl) -> [] memeDetails (with name selector as "ticker")
+  {/* if (nameSelector === "ticker") { */ }
+  {/*   ctx.state.memeCreatorDetails = { */ }
+  {/*     ...ctx.state.memeCreatorDetails, */ }
+  {/*     name: ctx.message?.inputText || "", */ }
+  {/*   }; */ }
+  {/*   console.log("memeCreatorDetails", ctx.state.memeCreatorDetails) */ }
+  {/* } */ }
+
 
   return {
     image: (
@@ -42,12 +57,12 @@ const handleRequest = frames(async (ctx) => {
         key="next"
         action="post"
         target={{
-          query: { selectedUrl: selectedImageUrl, nameSelector: "ticker" },
+          query: { selectedUrl: selectedImageUrl, nameSelector: "ticker", name: ctx.message?.inputText },
           pathname: nextPathname,
         }}
       >
         next
-      </Button>,
+      </Button >,
     ],
     textInput: textPrompt,
   };

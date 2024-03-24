@@ -58,8 +58,13 @@ const handleRequest = frames(async (ctx) => {
   console.log("ctx.params", ctx.searchParams.urls)
   if (ctx.state.searchedUrls.length === 0) {
     console.log("message", ctx.message?.inputText)
-    allSearchedImageUrls = await googleImageSearch(ctx.message?.inputText + " meme");
-    allSearchedImageUrls = await filterImageUrls(allSearchedImageUrls);
+    const memeMessage: string = ctx.message?.inputText || ctx.searchParams?.meme || "";
+    if (memeMessage.startsWith("http")) {
+      allSearchedImageUrls = [memeMessage];
+    } else {
+      allSearchedImageUrls = await googleImageSearch(memeMessage + " meme");
+      allSearchedImageUrls = await filterImageUrls(allSearchedImageUrls);
+    }
     // necessary processing step
     ctx.state.searchedUrls = allSearchedImageUrls;
     {/* console.log("filteredImageUrls", filteredImageUrls) */ }
