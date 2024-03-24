@@ -48,7 +48,7 @@ const handleRequest = frames(async (ctx) => {
         action='post'
         target={{
           query: { meme: suggestions[0] },
-          pathname: imgCompareRoute,
+          pathname: imgCompareRoute
         }}
       >
         {`&quot;${suggestions[0]}&quot; meme`}
@@ -58,7 +58,7 @@ const handleRequest = frames(async (ctx) => {
         action='post'
         target={{
           query: { meme: suggestions[1] },
-          pathname: imgCompareRoute,
+          pathname: imgCompareRoute
         }}
       >
         {`&quot;${suggestions[1]}&quot; meme`}
@@ -68,7 +68,7 @@ const handleRequest = frames(async (ctx) => {
         action='post'
         target={{
           query: {},
-          pathname: '/'
+          pathname: "/"
         }}
       >
         Regenerate suggestions

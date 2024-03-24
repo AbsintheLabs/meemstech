@@ -4,17 +4,27 @@ import { kv } from "@vercel/kv";
 
 export async function POST(req: NextRequest): Promise<NextResponse<any>> {
   try {
-    const json = await req.json();
+    // const json = await req.json();
 
-    const { ticker, address1, address2 } = json.untrustedData;
+    const url = new URL(req.url);
+    const ticker = url.searchParams.get("ticker");
+    const benefactors = url.searchParams.get("benefactors")?.split(",") ?? [];
+
+    console.log(ticker, benefactors);
 
     const key = `${address}/${ticker}`;
     await kv.set(key, processedImageUrl);
 
     const tx = await createFreme({
       ticker,
-      address1,
-      address2
+      address1:
+        benefactors?.length > 0 && benefactors[0] !== ""
+          ? benefactors[0]
+          : "0x0000000000000000000000000000000000000000",
+      address2:
+        benefactors?.length > 1 && benefactors[1] !== ""
+          ? benefactors[1]
+          : "0x0000000000000000000000000000000000000000"
     });
 
     return NextResponse.json(tx);
