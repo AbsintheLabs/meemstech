@@ -8,7 +8,9 @@ export const buyShares = async (data: any) => {
   try {
     const { amount, address } = data;
 
-    const buyPrice = await getBuyPriceAfterFee(address, amount);
+    // const buyPrice = await getBuyPriceAfterFee(address, amount);
+    // console.log("BUY PRICE", buyPrice)
+    const buyPrice = BigInt(62500000000000);
 
     const encodedData = encodeFunctionData({
       abi: memecoinAbi,

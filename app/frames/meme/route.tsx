@@ -9,7 +9,7 @@ const handleRequest = frames(async (ctx) => {
   return {
     image: (
       <div tw='flex flex-col'>
-        <div tw='flex'>Meme Meme Meme</div>
+        <div tw='flex'>Main Page</div>
       </div>
     ),
     buttons: [
@@ -40,7 +40,7 @@ const handleRequest = frames(async (ctx) => {
           pathname: "/frames"
         }}
       >
-        Create my MEME
+        Make My Own Meme
       </Button>,
       <Button
         key='next'
