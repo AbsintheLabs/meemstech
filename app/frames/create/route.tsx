@@ -13,8 +13,6 @@ async function launch(req: NextRequest): Promise<NextResponse<any>> {
     const selectedUrl = url.searchParams.get("selectedUrl") ?? "";
     const benefactors = url.searchParams.get("benefactors")?.split(",") ?? [];
 
-    console.log(ticker, benefactors);
-
     const [b64img] = await processImages([selectedUrl]);
 
     const key = `${json.untrustedData.address}/${ticker}`;

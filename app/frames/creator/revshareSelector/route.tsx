@@ -9,7 +9,7 @@ const frames = createFrames({
   initialState: {}
 });
 
-const handleRequest = frames(async (ctx) => {
+const handleRequest = frames(async (ctx: any) => {
   // image url that will be displayed
   const selectedImageUrl = ctx.searchParams.selectedUrl || "";
   // when set to "name", it will make you pick the name. when set to "ticker", it will make you pick the ticker
@@ -68,10 +68,18 @@ const handleRequest = frames(async (ctx) => {
         key='next'
         action='tx'
         target={{
-          query: { ...stateObj },
+          query: {
+            ticker: stateObj.ticker,
+            benefactors: stateObj.benefactors,
+            selectedUrl: stateObj.selectedUrl
+          },
           pathname: "/create"
         }}
-        post_url={`/creator/launched?ticker=${stateObj.ticker}`}
+        post_url={`/create?ticker=${
+          stateObj.ticker
+        }&selectedUrl=${stateObj.selectedUrl.toString()}&benefactors=${
+          stateObj.benefactors
+        }`}
       >
         Launch Meme
       </Button>
