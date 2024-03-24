@@ -78,9 +78,16 @@ const handleRequest = frames(async (ctx) => {
     image: (
       <div tw='flex flex-col justify-center items-center text-white w-full h-full bg-black'>
         <div tw='flex'>
-          <img width={200} height={200} src={processedImages[0]} alt='Image' />
+          <img
+            tw='mr-12'
+            width={200}
+            height={200}
+            src={processedImages[0]}
+            alt='Image'
+          />
           <img width={200} height={200} src={processedImages[1]} alt='Image' />
         </div>
+        <div tw='text-6xl mt-8'>Pick the one you love</div>
       </div>
     ),
     buttons: [
