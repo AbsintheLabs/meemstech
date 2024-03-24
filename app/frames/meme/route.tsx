@@ -23,7 +23,7 @@ const handleRequest = frames(async (ctx) => {
           },
           pathname: "/buy"
         }}
-        post_url='/frames'
+        post_url={`/buy?creatorAddress=${ctx.searchParams.creatorAddress}&ticker=${ctx.searchParams.ticker}`}
       >
         Buy
       </Button>,

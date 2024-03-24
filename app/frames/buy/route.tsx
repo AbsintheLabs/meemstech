@@ -1,8 +1,9 @@
 import { buyShares } from "@/app/utils/writeTransactions";
 import { TransactionTargetResponse } from "frames.js";
 import { NextRequest, NextResponse } from "next/server";
+import { createFrames } from "frames.js/next";
 
-export async function POST(
+export async function buy(
   req: NextRequest
 ): Promise<NextResponse<TransactionTargetResponse>> {
   try {
@@ -25,3 +26,20 @@ export async function POST(
     throw new Error("Invalid tx");
   }
 }
+
+const frames = createFrames({
+  basePath: "/frames",
+  initialState: {}
+});
+
+const handleRequest = frames(async () => {
+  return {
+    image: (
+      // TODO: explain how the user can add handles here and for what
+      <div tw='flex flex-col'>Buy</div>
+    )
+  };
+});
+
+export const GET = handleRequest;
+export const POST = buy;
