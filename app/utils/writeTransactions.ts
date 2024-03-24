@@ -10,7 +10,7 @@ export const createFreme = async (data: any) => {
     const encodedData = encodeFunctionData({
       abi: memecoinAbi,
       functionName: "createFreme",
-      args: [ticker, address1, address2]
+      args: [ticker?.toUpperCase(), address1, address2]
     });
 
     return {
