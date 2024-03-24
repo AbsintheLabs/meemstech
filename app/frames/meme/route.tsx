@@ -32,7 +32,7 @@ const handleRequest = frames(async (ctx: any) => {
         <div tw='flex text-6xl text-emerald-400'>
           Buy some ${ctx?.searchParams?.ticker?.toUpperCase()} here
         </div>
-        <div tw='flex text-4xl mt-2'>Creator - {values[2]?.profileName}</div>
+        <div tw='flex text-4xl mt-2'>Creator - @{values[2]?.profileName}</div>
         <div tw='flex text-4xl mt-2'>Current Supply - {Number(values[0])}</div>
         <div tw='flex text-4xl mt-2 mb-8'>
           Current Price - {Number(values[1]) / 10 ** 18} ETH
