@@ -3,7 +3,7 @@ import { TransactionTargetResponse } from "frames.js";
 import { NextRequest, NextResponse } from "next/server";
 import { createFrames } from "frames.js/next";
 
-export async function buy(
+async function buyHandler(
   req: NextRequest
 ): Promise<NextResponse<TransactionTargetResponse>> {
   try {
@@ -42,4 +42,4 @@ const handleRequest = frames(async () => {
 });
 
 export const GET = handleRequest;
-export const POST = buy;
+export const POST = buyHandler;
