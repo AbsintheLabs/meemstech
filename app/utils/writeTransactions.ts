@@ -15,7 +15,7 @@ export const buyShares = async (data: any) => {
     const encodedData = encodeFunctionData({
       abi: memecoinAbi,
       functionName: "buyShares",
-      args: [address, amount]
+      args: [address, amount],
     });
 
     return {
@@ -25,8 +25,8 @@ export const buyShares = async (data: any) => {
         abi: memecoinAbi,
         to: CONTRACT_ADDRESS,
         data: encodedData,
-        value: Number(buyPrice)
-      }
+        value: Number(buyPrice),
+      },
     };
   } catch (error) {
     console.error(error);
@@ -42,7 +42,7 @@ export const sellShares = async (data: any) => {
     const encodedData = encodeFunctionData({
       abi: memecoinAbi,
       functionName: "sellShares",
-      args: [address, amount]
+      args: [address, amount],
     });
 
     return {
@@ -51,9 +51,9 @@ export const sellShares = async (data: any) => {
       params: {
         abi: memecoinAbi,
         to: CONTRACT_ADDRESS,
-        data: encodedData
+        data: encodedData,
       },
-      value: Number(sellPrice)
+      value: Number(sellPrice),
     };
   } catch (error) {
     console.error(error);
