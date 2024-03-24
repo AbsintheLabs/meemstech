@@ -10,14 +10,14 @@ const { exec } = require("child_process");
 async function main() {
   const NETWORK = process.env.NETWORK;
 
-  const memecoins = await hre.ethers.deployContract("Memecoins");
+  const fremeswtf = await hre.ethers.deployContract("Fremeswtf");
 
-  await memecoins.waitForDeployment();
+  await fremeswtf.waitForDeployment();
 
-  console.log(`Memecoin deployed to ${memecoins.target}`);
+  console.log(`Fremes wtf deployed to ${fremeswtf.target}`);
 
   exec(
-    `npx hardhat verify --network ${NETWORK} ${memecoins.target}`,
+    `npx hardhat verify --network ${NETWORK} ${fremeswtf.target}`,
     async (error, stdout, stderr) => {
       console.log(`stdout: ${stdout}`);
       console.log(`stderr: ${stderr}`);
