@@ -1,15 +1,51 @@
+import { fetchFName } from "@/app/utils/fetchFollowers";
+import { fremesSupply, getBuyPrice } from "@/app/utils/readTransactions";
+import { kv } from "@vercel/kv";
 import { createFrames, Button } from "frames.js/next";
+import Image from "next/image";
 
 const frames = createFrames({
   basePath: "/frames",
   initialState: { pageIndex: 0, searchedUrls: [] as string[] }
 });
 
-const handleRequest = frames(async (ctx) => {
+const handleRequest = frames(async (ctx: any) => {
+  const totalSupply = fremesSupply(
+    ctx.searchParams.creatorAddress,
+    ctx.searchParams.ticker
+  );
+
+  const currentPrice = getBuyPrice(
+    ctx.searchParams.creatorAddress,
+    ctx.searchParams.ticker
+  );
+
+  const fName = fetchFName(ctx.searchParams.creatorAddress) as any;
+
+  const key = `${ctx.searchParams.creatorAddress}/${ctx.searchParams.ticker}`;
+  const url = kv.get(key);
+
+  const values = await Promise.all([totalSupply, currentPrice, fName, url]);
+
   return {
     image: (
-      <div tw='flex flex-col'>
-        <div tw='flex'>Main Page</div>
+      <div tw='flex flex-col items-center bg-black w-full h-full text-white justify-center'>
+        <div tw='flex text-6xl text-emerald-400'>
+          Buy some ${ctx?.searchParams?.ticker?.toUpperCase()} here
+        </div>
+        <div tw='flex text-4xl mt-2'>Creator - {values[2]?.profileName}</div>
+        <div tw='flex text-4xl mt-2'>Current Supply - {Number(values[0])}</div>
+        <div tw='flex text-4xl mt-2 mb-8'>
+          Current Price - {Number(values[1]) / 10 ** 18} ETH
+        </div>
+        <img
+          src={
+            "https://i.pinimg.com/originals/a4/f8/76/a4f87654a7f881390312402d56c8a524.jpg"
+          }
+          alt='meme img'
+          height={300}
+          width={300}
+        />
       </div>
     ),
     buttons: [

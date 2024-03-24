@@ -48,6 +48,31 @@ export const fetchEvmAddress = async (USER_ID: string) => {
   return data.Socials.Social[0]; // assuming you want to return this data
 };
 
+export const fetchFName = async (addres: string) => {
+  const query = `query MyQuery {
+      Socials(
+        input: {
+          filter: {
+            dappName: { _eq: farcaster }
+            identity: { _eq: "${addres}" }
+          }
+          blockchain: ethereum
+        }
+      ) {
+        Social {
+          profileName
+        }
+      }
+    }`;
+
+  const { data, error }: QueryResponse = await fetchQuery(query);
+
+  if (error) {
+    throw new Error(error.message);
+  }
+  return data.Socials.Social[0]; // assuming you want to return this data
+};
+
 // fetchEvmAddress("vitalik.eth");
 
 // module.exports = { fetchEvmAddress };
