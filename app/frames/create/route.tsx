@@ -1,9 +1,10 @@
-import { buyShares, createFreme } from "@/app/utils/writeTransactions";
+import { createFreme } from "@/app/utils/writeTransactions";
 import { NextRequest, NextResponse } from "next/server";
 import { kv } from "@vercel/kv";
 import { processImages } from "../../utils/processImages";
+import { createFrames } from "frames.js/next";
 
-export async function POST(req: NextRequest): Promise<NextResponse<any>> {
+async function launch(req: NextRequest): Promise<NextResponse<any>> {
   try {
     const json = await req.json();
 
@@ -37,3 +38,17 @@ export async function POST(req: NextRequest): Promise<NextResponse<any>> {
     return NextResponse.json({});
   }
 }
+
+const frames = createFrames({
+  basePath: "/frames",
+  initialState: {}
+});
+
+const handleRequest = frames(async () => {
+  return {
+    image: <div tw='flex flex-col'>Launch Meme</div>
+  };
+});
+
+export const GET = handleRequest;
+export const POST = launch;

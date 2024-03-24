@@ -34,10 +34,7 @@ const frames = createFrames({
 
 const handleRequest = frames(async () => {
   return {
-    image: (
-      // TODO: explain how the user can add handles here and for what
-      <div tw='flex flex-col'>Buy</div>
-    )
+    image: <div tw='flex flex-col'>Buy</div>
   };
 });
 
