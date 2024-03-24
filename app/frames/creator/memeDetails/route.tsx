@@ -9,9 +9,9 @@ const frames = createFrames({
     memeCreatorDetails: {
       name: "",
       ticker: "",
-      benefactors: [] as string[],
+      benefactors: [] as string[]
     }
-  },
+  }
 });
 
 const handleRequest = frames(async (ctx) => {
@@ -26,26 +26,46 @@ const handleRequest = frames(async (ctx) => {
       ? "name of meme (ex: dogwifhat)"
       : "ticker of meme(ex: WIF)";
   // only move on to the next route if the user has entered a ticker
-  const nextPathname = nameSelector === "name" ? "/creator/memeDetails" : "/creator/revshareSelector";
+  const nextPathname =
+    nameSelector === "name"
+      ? "/creator/memeDetails"
+      : "/creator/revshareSelector";
 
   // imgcmp -> memeDetails (with only selectedUrl) -> [] memeDetails (with name selector as "ticker")
-  {/* if (nameSelector === "ticker") { */ }
-  {/*   ctx.state.memeCreatorDetails = { */ }
-  {/*     ...ctx.state.memeCreatorDetails, */ }
-  {/*     name: ctx.message?.inputText || "", */ }
-  {/*   }; */ }
-  {/*   console.log("memeCreatorDetails", ctx.state.memeCreatorDetails) */ }
-  {/* } */ }
-
+  {
+    /* if (nameSelector === "ticker") { */
+  }
+  {
+    /*   ctx.state.memeCreatorDetails = { */
+  }
+  {
+    /*     ...ctx.state.memeCreatorDetails, */
+  }
+  {
+    /*     name: ctx.message?.inputText || "", */
+  }
+  {
+    /*   }; */
+  }
+  {
+    /*   console.log("memeCreatorDetails", ctx.state.memeCreatorDetails) */
+  }
+  {
+    /* } */
+  }
 
   return {
     image: (
-      <div tw='flex flex-col'>
+      <div tw='flex flex-col w-full h-full bg-black items-center justify-center'>
         <img width={220} height={220} src={processedImageUrl} alt='Image' />
         {nameSelector === "name" ? (
-          <div tw='flex'>in memeDetails route. select name of meme</div>
+          <div tw='flex text-5xl mt-4 text-emerald-400'>
+            Choose a hilarous name
+          </div>
         ) : (
-          <div tw='flex'>in memeDetails route. select ticker of meme</div>
+          <div tw='flex text-5xl mt-4 text-emerald-400'>
+            Select a ticker that will moon
+          </div>
         )}
       </div>
     ),
@@ -55,8 +75,12 @@ const handleRequest = frames(async (ctx) => {
         key='next'
         action='post'
         target={{
-          query: { selectedUrl: selectedImageUrl, nameSelector: "ticker", name: ctx.message?.inputText },
-          pathname: nextPathname,
+          query: {
+            selectedUrl: selectedImageUrl,
+            nameSelector: "ticker",
+            name: ctx.message?.inputText
+          },
+          pathname: nextPathname
         }}
       >
         next

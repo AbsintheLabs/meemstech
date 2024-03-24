@@ -1,8 +1,5 @@
 import { createFrames, Button } from "frames.js/next";
-import { getAddressForFid } from "frames.js"
-
-// not ideal import paths for now
-import { processImages } from "../../../utils/processImages";
+import { getAddressForFid } from "frames.js";
 
 const frames = createFrames({
   basePath: "/frames",
@@ -11,33 +8,31 @@ const frames = createFrames({
 
 const handleRequest = frames(async (ctx) => {
   // TODO: create something that will autogenerate this
-  let launchedLink = '';
+  let launchedLink = "";
+  let ticker;
   try {
     const json = await ctx.request.json();
     const address = await getAddressForFid({ fid: json.untrustedData.fid });
-    const ticker = ctx.searchParams.ticker;
-    launchedLink = `https://fremes.wtf/meme/creatorAddress=${address}&ticker=${ticker}`
+    ticker = ctx.searchParams.ticker;
+    launchedLink = `https://fremes.wtf/meme/creatorAddress=${address}&ticker=${ticker}`;
   } catch (error) {
     console.error(error);
-    console.error('failed to get address for fid');
+    console.error("failed to get address for fid");
   }
-
 
   return {
     image: (
       // TODO: explain how the user can add handles here and for what
-      <div tw='flex flex-col'>
-        {/* <img width={220} height={220} src={} alt='Image' /> */}
-        <div tw='flex'>launched screen</div>
-        <div tw='flex'>click on the link. copy the url in the url bar. and paste it into a new warp!</div>
+      <div tw='flex flex-col w-full h-full items-center justify-center bg-black p-8 text-white'>
+        <div tw='flex text-6xl text-center text-emerald-400'>{`$[${ticker}] is live!`}</div>
+        <div tw='flex text-5xl text-center mt-6'>
+          {" "}
+          Build your lore, cast about your new freme!
+        </div>
       </div>
     ),
     buttons: [
-      <Button
-        key='next'
-        action='link'
-        target={launchedLink}
-      >
+      <Button key='next' action='link' target={launchedLink}>
         Repost the warp! 🚀
       </Button>
     ]

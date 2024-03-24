@@ -42,9 +42,15 @@ const handleRequest = frames(async (ctx) => {
   return {
     image: (
       // TODO: explain how the user can add handles here and for what
-      <div tw='flex flex-col'>
+      <div tw='flex flex-col w-full h-full bg-black items-center justify-center text-white p-4'>
         <img width={220} height={220} src={processedImageUrl} alt='Image' />
-        <div tw='flex'>benefactor list. no more than 2 names can be used</div>
+        <div tw='flex text-5xl mt-6 text-center items-center justify-center'>
+          You can select upto 2 frens to get revshare. They just have to buy
+          your Freme! (You can add them later also) Ready? Launch!
+        </div>
+        <div tw='flex text-3xl mt-4 p-4'>
+          Benefactors - {stateObj.benefactors.split(",").length - 1}
+        </div>
       </div>
     ),
     buttons: [
@@ -68,7 +74,7 @@ const handleRequest = frames(async (ctx) => {
         post_url={`/creator/launched?ticker=${stateObj.ticker}`}
       >
         Launch Meme
-      </Button >
+      </Button>
     ],
     textInput: "add handle here (vitalik.eth)"
   };

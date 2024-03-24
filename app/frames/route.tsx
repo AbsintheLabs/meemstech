@@ -19,25 +19,18 @@ const handleRequest = frames(async (ctx) => {
 
   return {
     image: (
-      <div tw='flex flex-col h-screen w-full bg-slate-200'>
+      <div tw='flex flex-col h-full w-full bg-black text-white'>
         <div tw='flex justify-center mt-16 text-8xl'>
-          <div tw="flex text-blue-800 bg-yellow-400">fremes.wtf</div>
+          <div tw='flex text-emerald-400'>fremes.wtf</div>
         </div>
         <div tw='flex justify-center mt-16 text-6xl'>
-          <div tw="flex ">Create your own meme keys</div>
+          <div tw='flex '>Create your own meme keys</div>
         </div>
-        <div tw='flex justify-center mt-16 text-6xl'>
-          <div tw="flex">
-            Either
-            <div>
-              1. use the suggestions provided
-            </div>
-            <div>
-              2. search for a meme from the textbox
-            </div>
-            <div>
-              3. input a image url directly
-            </div>
+        <div tw='flex justify-center mt-16 text-5xl'>
+          <div tw='flex flex-col'>
+            <div>1. Use the suggestions provided</div>
+            <div className='mt-2'>2. Search for a meme using the textbox</div>
+            <div className='mt-2'>3. Input an image url directly</div>
           </div>
         </div>
       </div>

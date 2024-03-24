@@ -48,8 +48,8 @@ const handleRequest = frames(async (ctx) => {
   let allSearchedImageUrls = [];
   let filteredImageUrls = [];
   if (ctx.state.searchedUrls.length === 0) {
-    console.log("message", ctx.message?.inputText)
-    const memeMessage: string = ctx.message?.inputText || ctx.searchParams?.meme || "";
+    const memeMessage: string =
+      ctx.message?.inputText || ctx.searchParams?.meme || "";
     if (memeMessage.startsWith("http")) {
       allSearchedImageUrls = [memeMessage];
     } else {
@@ -76,10 +76,11 @@ const handleRequest = frames(async (ctx) => {
 
   return {
     image: (
-      <div tw='flex'>
-        <img width={150} height={150} src={processedImages[0]} alt='Image' />
-        <img width={150} height={150} src={processedImages[1]} alt='Image' />
-        <div tw='flex'>see ya later</div>
+      <div tw='flex flex-col justify-center items-center text-white w-full h-full bg-black'>
+        <div tw='flex'>
+          <img width={200} height={200} src={processedImages[0]} alt='Image' />
+          <img width={200} height={200} src={processedImages[1]} alt='Image' />
+        </div>
       </div>
     ),
     buttons: [
