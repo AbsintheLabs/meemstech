@@ -8,7 +8,7 @@ export const getBuyPrice = async (subjectAddress: string, ticker: string) => {
       address: MEME_CONTRACT_ADDRESS,
       abi: memecoinAbi,
       functionName: "getBuyPrice",
-      args: [subjectAddress, ticker, 1]
+      args: [subjectAddress, ticker?.toUpperCase(), 1]
     });
 
     return response;
@@ -28,7 +28,7 @@ export const getBuyPriceAfterFee = async (
       abi: memecoinAbi,
       functionName: "getBuyPriceAfterFee",
 
-      args: [subjectAddress, ticker, Number(amt)]
+      args: [subjectAddress, ticker?.toUpperCase(), Number(amt)]
     });
 
     return response;
@@ -47,7 +47,7 @@ export const getSellPriceAfterFee = async (
       address: MEME_CONTRACT_ADDRESS,
       abi: memecoinAbi,
       functionName: "getSellPriceAfterFee",
-      args: [subjectAddress, amt]
+      args: [subjectAddress, ticker?.toUpperCase(), amt]
     });
 
     return response;
@@ -65,7 +65,7 @@ export const fremesSupply = async (
       address: MEME_CONTRACT_ADDRESS,
       abi: memecoinAbi,
       functionName: "fremesSupply",
-      args: [subjectAddress, ticker]
+      args: [subjectAddress, ticker?.toUpperCase()]
     });
 
     return response as number;
@@ -84,7 +84,7 @@ export const fremesBalance = async (
       address: MEME_CONTRACT_ADDRESS,
       abi: memecoinAbi,
       functionName: "fremesBalance",
-      args: [subjectAddress, ticker, holderAddress]
+      args: [subjectAddress, ticker?.toUpperCase(), holderAddress]
     });
 
     return response;

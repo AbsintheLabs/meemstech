@@ -38,7 +38,7 @@ export const buyShares = async (data: any) => {
       abi: memecoinAbi,
 
       functionName: "buyFremes",
-      args: [address, ticker, amount]
+      args: [address, ticker?.toUpperCase(), amount]
     });
 
     return {
@@ -67,7 +67,7 @@ export const sellShares = async (data: any) => {
       abi: memecoinAbi,
 
       functionName: "sellFremes",
-      args: [address, ticker, amount]
+      args: [address, ticker?.toUpperCase(), amount]
     });
 
     return {
