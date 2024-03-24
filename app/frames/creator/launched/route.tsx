@@ -31,7 +31,7 @@ const handleRequest = frames(async (ctx) => {
         </div>
         <div tw='flex text-4xl text-center mt-6' >
           {" "}
-          Don&apos; worry if you get a 404. Just copy the link anyway and repost it
+          Don&apos; worry if you get a 404 or blank page. Just copy the link anyway and repost it
         </div>
       </div>
     ),
