@@ -5,13 +5,15 @@ export async function POST(req: NextRequest): Promise<NextResponse<any>> {
   try {
     const json = await req.json();
 
-    const subjectAddress =
-      req.url.split("?")[1].split("&")[0].split("=")[1] ?? "";
+    const url = new URL(req.url);
+    const creatorAddress = url.searchParams.get("creatorAddress");
+    const ticker = url.searchParams.get("ticker");
 
     const { inputText: amount } = json.untrustedData;
 
     const tx = await sellShares({
-      address: subjectAddress,
+      address: creatorAddress,
+      ticker,
       amount
     });
 
