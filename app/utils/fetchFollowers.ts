@@ -23,13 +23,13 @@ interface Social {
   userAddress: string;
 }
 
-const fetchEvmAddress = async (USER_ID: string) => {
+export const fetchEvmAddress = async (USER_ID: string) => {
   const query = `query MyQuery {
       Socials(
         input: {
           filter: {
             dappName: { _eq: farcaster }
-            identity: { _eq: "${USER_ID}" }
+            identity: { _eq: "fc_fname:${USER_ID}" }
           }
           blockchain: ethereum
         }

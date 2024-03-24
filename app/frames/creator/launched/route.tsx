@@ -24,6 +24,8 @@ const handleRequest = frames(async (ctx) => {
   const textPrompt = nameSelector === "name" ? "name of meme (ex: dogwifhat)" : "ticker of meme (ex: WIF)";
   console.log("selectedImageUrl", selectedImageUrl)
 
+
+
   return {
     image: (
       // TODO: explain how the user can add handles here and for what
