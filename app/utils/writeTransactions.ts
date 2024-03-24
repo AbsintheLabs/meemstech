@@ -20,7 +20,7 @@ export const createFreme = async (data: any) => {
         abi: memecoinAbi,
         to: MEME_CONTRACT_ADDRESS,
         data: encodedData,
-        value: 0
+        value: "0"
       }
     };
   } catch (error) {

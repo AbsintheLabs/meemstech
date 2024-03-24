@@ -3,8 +3,11 @@ import { NextRequest, NextResponse } from "next/server";
 import { kv } from "@vercel/kv";
 import { processImages } from "../../utils/processImages";
 import { createFrames } from "frames.js/next";
+import { TransactionTargetResponse } from "frames.js";
 
-async function launch(req: NextRequest): Promise<NextResponse<any>> {
+async function launch(
+  req: NextRequest
+): Promise<NextResponse<TransactionTargetResponse>> {
   try {
     const json = await req.json();
 
@@ -30,10 +33,10 @@ async function launch(req: NextRequest): Promise<NextResponse<any>> {
           : "0x0000000000000000000000000000000000000000"
     });
 
-    return NextResponse.json(tx);
+    return NextResponse.json(tx as TransactionTargetResponse);
   } catch (error) {
     console.error(error);
-    return NextResponse.json({});
+    return NextResponse.json({} as TransactionTargetResponse);
   }
 }
 
