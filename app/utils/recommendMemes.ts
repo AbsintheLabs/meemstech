@@ -26,8 +26,8 @@ async function getRandomEntryFromCSV(filePath: string) {
 }
 
 export async function suggestMemes() {
-  const path1 = "meme_phrases.csv";
-  const path2 = "public_figures.csv";
+  const path1 = "public/meme_phrases.csv";
+  const path2 = "public/public_figures.csv";
   const entry1 = await getRandomEntryFromCSV(path1);
   const entry2 = await getRandomEntryFromCSV(path2);
 

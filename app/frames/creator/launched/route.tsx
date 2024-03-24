@@ -1,4 +1,5 @@
 import { createFrames, Button } from "frames.js/next";
+import { getAddressForFid } from "frames.js"
 
 // not ideal import paths for now
 import { processImages } from "../../../utils/processImages";
@@ -11,7 +12,7 @@ const frames = createFrames({
 const handleRequest = frames(async (ctx) => {
   // TODO: create something that will autogenerate this
   const json = await ctx.request.json();
-  const address = json.untrustedData.address;
+  const address = await getAddressForFid({ fid: json.untrustedData.fid });
   const ticker = ctx.searchParams.ticker;
   const launchedLink = `https://fremes.wtf/meme/creatorAddress=${address}&ticker=${ticker}`
 
