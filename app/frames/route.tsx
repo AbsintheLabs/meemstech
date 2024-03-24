@@ -1,10 +1,6 @@
 import { createFrames, Button } from "frames.js/next";
 import { suggestMemes } from "../utils/recommendMemes";
 
-const totalPages = 10;
-const path1 = "public/meme_phrases.csv";
-const path2 = "public/public_figures.csv";
-
 const frames = createFrames({
   basePath: "/frames",
   initialState: {
@@ -23,9 +19,27 @@ const handleRequest = frames(async (ctx) => {
 
   return {
     image: (
-      <div tw='flex flex-col'>
-        {/* <img width={300} height={200} src={imageUrl} alt="Image" /> */}
-        <div tw="flex">pick a meme from the suggestions or search for your own</div>
+      <div tw='flex flex-col h-screen w-full bg-slate-200'>
+        <div tw='flex justify-center mt-16 text-8xl'>
+          <div tw="flex text-blue-800 bg-yellow-400">fremes.wtf</div>
+        </div>
+        <div tw='flex justify-center mt-16 text-6xl'>
+          <div tw="flex ">Create your own meme keys</div>
+        </div>
+        <div tw='flex justify-center mt-16 text-6xl'>
+          <div tw="flex">
+            Either
+            <div>
+              1. use the suggestions provided
+            </div>
+            <div>
+              2. search for a meme from the textbox
+            </div>
+            <div>
+              3. input a image url directly
+            </div>
+          </div>
+        </div>
       </div>
     ),
     buttons: [
@@ -70,7 +84,7 @@ const handleRequest = frames(async (ctx) => {
         Search from textbox
       </Button>
     ],
-    textInput: "search with text input"
+    textInput: "google search or paste image url"
   };
 });
 
