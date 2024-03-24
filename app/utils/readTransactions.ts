@@ -2,13 +2,13 @@ import { memecoinAbi } from "../abi/memecoinAbi";
 import { MEME_CONTRACT_ADDRESS } from "./constants";
 import { publicClient } from "./publicClient";
 
-export const getBuyPrice = async (subjectAddress: string) => {
+export const getBuyPrice = async (subjectAddress: string, ticker: string) => {
   try {
     const response = await publicClient.readContract({
       address: MEME_CONTRACT_ADDRESS,
       abi: memecoinAbi,
       functionName: "getBuyPrice",
-      args: [subjectAddress, "WOFF", 1]
+      args: [subjectAddress, ticker, 1]
     });
 
     return response;
@@ -56,7 +56,10 @@ export const getSellPriceAfterFee = async (
   }
 };
 
-export const fremesSupply = async (subjectAddress: string, ticker: string) => {
+export const fremesSupply = async (
+  subjectAddress: string,
+  ticker: string
+): Promise<number> => {
   try {
     const response = await publicClient.readContract({
       address: MEME_CONTRACT_ADDRESS,
@@ -65,7 +68,7 @@ export const fremesSupply = async (subjectAddress: string, ticker: string) => {
       args: [subjectAddress, ticker]
     });
 
-    return response;
+    return response as number;
   } catch (error) {
     return 0;
   }
