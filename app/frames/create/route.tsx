@@ -1,15 +1,16 @@
-import { buyShares } from "@/app/utils/writeTransactions";
+import { buyShares, createFreme } from "@/app/utils/writeTransactions";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest): Promise<NextResponse<any>> {
   try {
     const json = await req.json();
 
-    const { address } = json.untrustedData;
+    const { ticker, address1, address2 } = json.untrustedData;
 
-    const tx = await buyShares({
-      address,
-      amount: 1
+    const tx = await createFreme({
+      ticker,
+      address1,
+      address2
     });
 
     return NextResponse.json(tx);

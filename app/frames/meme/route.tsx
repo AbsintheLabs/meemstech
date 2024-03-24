@@ -17,9 +17,13 @@ const handleRequest = frames(async (ctx) => {
         key='next'
         action='tx'
         target={{
-          query: { address: ctx.searchParams.token },
+          query: {
+            creatorAddress: ctx.searchParams.creatorAddress,
+            ticker: ctx.searchParams.ticker
+          },
           pathname: "/buy"
         }}
+        post_url='/frames'
       >
         Buy
       </Button>,
@@ -27,7 +31,10 @@ const handleRequest = frames(async (ctx) => {
         key='next'
         action='tx'
         target={{
-          query: { address: ctx.searchParams.token },
+          query: {
+            creatorAddress: ctx.searchParams.creatorAddress,
+            ticker: ctx.searchParams.ticker
+          },
           pathname: "/sell"
         }}
       >

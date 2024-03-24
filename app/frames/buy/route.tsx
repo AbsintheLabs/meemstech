@@ -1,28 +1,27 @@
 import { buyShares } from "@/app/utils/writeTransactions";
+import { TransactionTargetResponse } from "frames.js";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(req: NextRequest): Promise<NextResponse<any>> {
+export async function POST(
+  req: NextRequest
+): Promise<NextResponse<TransactionTargetResponse>> {
   try {
     const json = await req.json();
 
-    const subjectAddress =
-      req.url.split("?")[1].split("&")[0].split("=")[1] ?? "";
-    {/* const subjectAddress = "0x5aC09Ca0865B5492a82460acb43ce658Ea6163D2" */ }
-    console.log("subjectAddress", subjectAddress)
-    console.log(json)
+    const url = new URL(req.url);
+    const creatorAddress = url.searchParams.get("creatorAddress");
+    const ticker = url.searchParams.get("ticker");
 
     const { inputText: amount } = json.untrustedData;
 
     const tx = await buyShares({
-      address: subjectAddress,
+      address: creatorAddress,
+      ticker,
       amount
     });
 
-    console.log("tx:", tx)
-
-    return NextResponse.json(tx);
+    return NextResponse.json(tx as TransactionTargetResponse);
   } catch (error) {
-    console.error(error);
-    return NextResponse.json({});
+    throw new Error("Invalid tx");
   }
 }

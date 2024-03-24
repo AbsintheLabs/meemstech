@@ -1,21 +1,20 @@
 import { memecoinAbi } from "../abi/memecoinAbi";
 import { encodeFunctionData } from "viem";
 import { getBuyPriceAfterFee, getSellPriceAfterFee } from "./readTransactions";
+import { MEME_CONTRACT_ADDRESS } from "./constants";
 
-const CONTRACT_ADDRESS = "0x331Fe061948E52CD96cF49E0a2fEBc4cd22a5F62";
-
-export const buyShares = async (data: any) => {
+export const createFreme = async (data: any) => {
   try {
-    const { amount, address } = data;
-
-    const buyPrice = await getBuyPriceAfterFee(address, amount);
-    // console.log("BUY PRICE", buyPrice)
-    // const buyPrice = BigInt(62500000000000);
+    const { ticker, address1, address2 } = data;
 
     const encodedData = encodeFunctionData({
       abi: memecoinAbi,
-      functionName: "buyShares",
-      args: [address, amount],
+      functionName: "createFreme",
+      args: [
+        ticker,
+        address1 ?? "0x0000000000000000000000000000000000000000",
+        address2 ?? "0x0000000000000000000000000000000000000000"
+      ]
     });
 
     return {
@@ -23,10 +22,39 @@ export const buyShares = async (data: any) => {
       method: "eth_sendTransaction",
       params: {
         abi: memecoinAbi,
-        to: CONTRACT_ADDRESS,
+        to: MEME_CONTRACT_ADDRESS,
         data: encodedData,
-        value: Number(buyPrice),
-      },
+        value: 0
+      }
+    };
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const buyShares = async (data: any) => {
+  try {
+    const { amount, ticker, address } = data;
+
+    const buyPrice = await getBuyPriceAfterFee(address, ticker, amount);
+
+    const encodedData = encodeFunctionData({
+      abi: memecoinAbi,
+
+      functionName: "buyFremes",
+      args: [address, ticker, amount]
+    });
+
+    return {
+      chainId: "eip155:8453",
+      method: "eth_sendTransaction",
+      params: {
+        abi: memecoinAbi,
+        to: MEME_CONTRACT_ADDRESS,
+        data: encodedData,
+
+        value: Number(buyPrice).toString()
+      }
     };
   } catch (error) {
     console.error(error);
@@ -35,14 +63,15 @@ export const buyShares = async (data: any) => {
 
 export const sellShares = async (data: any) => {
   try {
-    const { amount, address } = data;
+    const { amount, ticker, address } = data;
 
-    const sellPrice = await getSellPriceAfterFee(address, amount);
+    const sellPrice = await getSellPriceAfterFee(address, ticker, amount);
 
     const encodedData = encodeFunctionData({
       abi: memecoinAbi,
-      functionName: "sellShares",
-      args: [address, amount],
+
+      functionName: "sellFremes",
+      args: [address, ticker, amount]
     });
 
     return {
@@ -50,10 +79,11 @@ export const sellShares = async (data: any) => {
       method: "eth_sendTransaction",
       params: {
         abi: memecoinAbi,
-        to: CONTRACT_ADDRESS,
+
+        to: MEME_CONTRACT_ADDRESS,
         data: encodedData,
-      },
-      value: Number(sellPrice),
+        value: Number(sellPrice).toString()
+      }
     };
   } catch (error) {
     console.error(error);

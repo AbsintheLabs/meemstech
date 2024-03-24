@@ -1,15 +1,15 @@
 import { memecoinAbi } from "../abi/memecoinAbi";
+import { MEME_CONTRACT_ADDRESS } from "./constants";
 import { publicClient } from "./publicClient";
-
-const CONTRACT_ADDRESS = "0x331Fe061948E52CD96cF49E0a2fEBc4cd22a5F62";
 
 export const getBuyPrice = async (subjectAddress: string) => {
   try {
     const response = await publicClient.readContract({
-      address: CONTRACT_ADDRESS,
+      address: MEME_CONTRACT_ADDRESS,
       abi: memecoinAbi,
       functionName: "getBuyPrice",
-      args: [subjectAddress, 1],
+      args: [subjectAddress, "WOFF", 1]
+
     });
 
     return response;
@@ -20,14 +20,16 @@ export const getBuyPrice = async (subjectAddress: string) => {
 
 export const getBuyPriceAfterFee = async (
   subjectAddress: string,
+  ticker: string,
   amt: string
 ) => {
   try {
     const response = await publicClient.readContract({
-      address: CONTRACT_ADDRESS,
+      address: MEME_CONTRACT_ADDRESS,
       abi: memecoinAbi,
       functionName: "getBuyPriceAfterFee",
-      args: [subjectAddress, Number(amt)],
+
+      args: [subjectAddress, ticker, Number(amt)]
     });
 
     return response;
@@ -38,11 +40,12 @@ export const getBuyPriceAfterFee = async (
 
 export const getSellPriceAfterFee = async (
   subjectAddress: string,
+  ticker: string,
   amt: string
 ) => {
   try {
     const response = await publicClient.readContract({
-      address: CONTRACT_ADDRESS,
+      address: MEME_CONTRACT_ADDRESS,
       abi: memecoinAbi,
       functionName: "getSellPriceAfterFee",
       args: [subjectAddress, amt],
@@ -80,6 +83,7 @@ export const fremesBalance = async (
       abi: memecoinAbi,
       functionName: "fremesBalance",
       args: [subjectAddress, ticker, holderAddress],
+
     });
 
     return response;

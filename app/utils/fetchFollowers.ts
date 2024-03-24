@@ -45,7 +45,6 @@ const fetchEvmAddress = async (USER_ID: string) => {
   if (error) {
     throw new Error(error.message);
   }
-  //   console.log(data.Socials.Social[0]);
   return data.Socials.Social[0]; // assuming you want to return this data
 };
 

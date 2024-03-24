@@ -7,8 +7,6 @@ dotenv.config();
 const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
 const GOOGLE_CSE_ID = process.env.GOOGLE_CSE_ID;
 
-console.log("able to get api keys")
-
 // Define a type for the expected response to ensure type-safety.
 type GoogleImageSearchResponse = {
   items: Array<{
@@ -16,7 +14,10 @@ type GoogleImageSearchResponse = {
   }>;
 };
 
-export default async function googleImageSearch(query: string, upToNumber: number = 0): Promise<string[]> {
+export default async function googleImageSearch(
+  query: string,
+  upToNumber: number = 0
+): Promise<string[]> {
   if (!GOOGLE_API_KEY || !GOOGLE_CSE_ID) {
     throw new Error("Google API key or Custom Search Engine ID is not set");
   }
@@ -38,12 +39,3 @@ export default async function googleImageSearch(query: string, upToNumber: numbe
     return [];
   }
 }
-
-// Usage example (comment this out in production code):
-// googleImageSearch("bogdanoff twins pump it")
-//   .then((images) => {
-//     console.log(images);
-//   })
-//   .catch((error) => {
-//     console.error(error);
-//   });
