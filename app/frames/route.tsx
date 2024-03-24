@@ -44,7 +44,7 @@ const handleRequest = frames(async (ctx) => {
           pathname: imgCompareRoute
         }}
       >
-        {`&quot;${suggestions[0]}&quot; meme`}
+        {`&quot;${suggestions[0]}&quot;`}
       </Button>,
       <Button
         key='next'
@@ -54,7 +54,7 @@ const handleRequest = frames(async (ctx) => {
           pathname: imgCompareRoute
         }}
       >
-        {`&quot;${suggestions[1]}&quot; meme`}
+        {`&quot;${suggestions[1]}&quot;`}
       </Button>,
       <Button
         key='next'
@@ -64,7 +64,7 @@ const handleRequest = frames(async (ctx) => {
           pathname: "/"
         }}
       >
-        Regenerate suggestions
+        More Suggestions
       </Button>,
       <Button
         key='next'
@@ -74,7 +74,7 @@ const handleRequest = frames(async (ctx) => {
           pathname: imgCompareRoute
         }}
       >
-        Search from textbox
+        Search 🔎
       </Button>
     ],
     textInput: "google search or paste image url"

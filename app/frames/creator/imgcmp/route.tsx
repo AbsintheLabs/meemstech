@@ -115,7 +115,7 @@ const handleRequest = frames(async (ctx) => {
           pathname: "/creator/imgcmp"
         }}
       >
-        Next Meme Image
+        Show Another
       </Button>,
       <Button
         key='next'
@@ -125,7 +125,7 @@ const handleRequest = frames(async (ctx) => {
           pathname: "/"
         }}
       >
-        Go back
+        Go back⬅
       </Button>
     ]
   };
