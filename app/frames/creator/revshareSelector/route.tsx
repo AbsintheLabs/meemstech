@@ -22,7 +22,7 @@ const handleRequest = frames(async (ctx) => {
     // default to the query param unless it exists from the prev frame input text
     ticker: ctx.searchParams.ticker || ctx.message?.inputText,
     benefactors: (ctx.searchParams.benefactors || "") as string
-  }
+  };
 
   // given warpcast handle, get eoa address
 
@@ -30,11 +30,12 @@ const handleRequest = frames(async (ctx) => {
   if (ctx.searchParams.notFirstTime) {
     // get eoa address
     try {
-      console.log(stateObj.benefactors)
-      const address = await fetchEvmAddress(ctx.message?.inputText)
-      stateObj.benefactors = stateObj.benefactors.concat(address.userAddress + ",")
+      const address = await fetchEvmAddress(ctx.message?.inputText);
+      stateObj.benefactors = stateObj.benefactors.concat(
+        address.userAddress + ","
+      );
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
   }
 

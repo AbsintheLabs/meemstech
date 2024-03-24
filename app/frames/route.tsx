@@ -25,7 +25,9 @@ const handleRequest = frames(async (ctx) => {
     image: (
       <div tw='flex flex-col'>
         {/* <img width={300} height={200} src={imageUrl} alt="Image" /> */}
-        <div tw="flex">pick a meme from the suggestions or search for your own</div>
+        <div tw='flex'>
+          pick a meme from the suggestions or search for your own
+        </div>
       </div>
     ),
     buttons: [
@@ -34,7 +36,7 @@ const handleRequest = frames(async (ctx) => {
         action='post'
         target={{
           query: { meme: suggestions[0] },
-          pathname: imgCompareRoute,
+          pathname: imgCompareRoute
         }}
       >
         {`&quot;${suggestions[0]}&quot; meme`}
@@ -44,7 +46,7 @@ const handleRequest = frames(async (ctx) => {
         action='post'
         target={{
           query: { meme: suggestions[1] },
-          pathname: imgCompareRoute,
+          pathname: imgCompareRoute
         }}
       >
         {`&quot;${suggestions[1]}&quot; meme`}
@@ -54,7 +56,7 @@ const handleRequest = frames(async (ctx) => {
         action='post'
         target={{
           query: {},
-          pathname: '/'
+          pathname: "/"
         }}
       >
         Regenerate suggestions
