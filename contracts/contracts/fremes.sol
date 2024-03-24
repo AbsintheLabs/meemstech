@@ -28,13 +28,15 @@ contract Fremeswtf {
     );
 
     // creatorAddress => (ticker => ( holderAddress => balance)))
-    mapping(address => mapping(string => mapping(address => uint256))) fremesBalance;
+    mapping(address => mapping(string => mapping(address => uint256)))
+        public fremesBalance;
 
     // creatorAddress => (ticker => supply))
-    mapping(address => mapping(string => uint256)) fremesSupply;
+    mapping(address => mapping(string => uint256)) public fremesSupply;
 
     // creatorAddress => (ticker => (benefactorIndex => benefactorAddress))
-    mapping(address => mapping(string => mapping(uint256 => address))) benefactors;
+    mapping(address => mapping(string => mapping(uint256 => address)))
+        public benefactors;
 
     address private _owner;
 
