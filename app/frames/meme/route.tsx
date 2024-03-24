@@ -50,6 +50,9 @@ const handleRequest = frames(async (ctx: any) => {
         />
       </div>
     ),
+    headers: {
+      "Cache-Control": "max-age=5",
+    },
     buttons: [
       <Button
         key='next'
@@ -57,7 +60,7 @@ const handleRequest = frames(async (ctx: any) => {
         target={{
           query: {
             creatorAddress: ctx.searchParams.creatorAddress,
-            ticker: ctx.searchParams.ticker
+            ticker: ctx.searchParams.ticker,
           },
           pathname: "/buy"
         }}
@@ -90,10 +93,6 @@ const handleRequest = frames(async (ctx: any) => {
       <Button
         key='next'
         action='post'
-        target={{
-          query: {},
-          pathname: ""
-        }}
       >
         Points Coming Soon
       </Button>
