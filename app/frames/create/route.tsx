@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { kv } from "@vercel/kv";
 import { processImages } from "../../utils/processImages";
 import { createFrames } from "frames.js/next";
-import { TransactionTargetResponse } from "frames.js";
+import { TransactionTargetResponse, getAddressForFid } from "frames.js";
 
 async function launch(
   req: NextRequest
@@ -17,8 +17,9 @@ async function launch(
     const benefactors = url.searchParams.get("benefactors")?.split(",") ?? [];
 
     const [b64img] = await processImages([selectedUrl]);
+    const address = await getAddressForFid({ fid: json.untrustedData.fid });
 
-    const key = `${json.untrustedData.address}/${ticker}`;
+    const key = `${address}/${ticker}`;
     await kv.set(key, b64img);
 
     const tx = await createFreme({

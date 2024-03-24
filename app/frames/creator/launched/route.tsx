@@ -14,7 +14,7 @@ const handleRequest = frames(async (ctx) => {
     const json = await ctx.request.json();
     const address = await getAddressForFid({ fid: json.untrustedData.fid });
     ticker = ctx.searchParams.ticker;
-    launchedLink = `https://fremes.wtf/meme/creatorAddress=${address}&ticker=${ticker}`;
+    launchedLink = `https://fremes.wtf/frames/meme?creatorAddress=${address}&ticker=${ticker}`;
   } catch (error) {
     console.error(error);
     console.error("failed to get address for fid");
