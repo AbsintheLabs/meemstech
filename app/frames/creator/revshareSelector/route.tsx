@@ -75,11 +75,7 @@ const handleRequest = frames(async (ctx: any) => {
           },
           pathname: "/create"
         }}
-        post_url={`/create?ticker=${
-          stateObj.ticker
-        }&selectedUrl=${stateObj.selectedUrl.toString()}&benefactors=${
-          stateObj.benefactors
-        }`}
+        post_url={`/creator/launched?ticker=${stateObj.ticker}`}
       >
         Launch Meme
       </Button>
