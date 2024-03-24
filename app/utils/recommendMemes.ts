@@ -28,9 +28,11 @@ async function getRandomEntryFromCSV(filePath: string) {
   return records[randomIndex];
 }
 
-async function suggestMemes(csvFilePath1: string, csvFilePath2: string) {
-  const entry1 = await getRandomEntryFromCSV(csvFilePath1);
-  const entry2 = await getRandomEntryFromCSV(csvFilePath2);
+export async function suggestMemes() {
+  const path1 = "public/meme_phrases.csv";
+  const path2 = "public/public_figures.csv";
+  const entry1 = await getRandomEntryFromCSV(path1);
+  const entry2 = await getRandomEntryFromCSV(path2);
 
   //   console.log("Random entry from first CSV:", entry1);
   //   console.log("Random entry from second CSV:", entry2);
@@ -39,3 +41,4 @@ async function suggestMemes(csvFilePath1: string, csvFilePath2: string) {
 }
 
 // suggestMemes(path1, path2).catch(console.error);
+// export default suggestMemes;
