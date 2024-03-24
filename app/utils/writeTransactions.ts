@@ -40,6 +40,7 @@ export const buyShares = async (data: any) => {
 
     const encodedData = encodeFunctionData({
       abi: memecoinAbi,
+
       functionName: "buyFremes",
       args: [address, ticker, amount]
     });
@@ -51,6 +52,7 @@ export const buyShares = async (data: any) => {
         abi: memecoinAbi,
         to: MEME_CONTRACT_ADDRESS,
         data: encodedData,
+
         value: Number(buyPrice).toString()
       }
     };
@@ -67,6 +69,7 @@ export const sellShares = async (data: any) => {
 
     const encodedData = encodeFunctionData({
       abi: memecoinAbi,
+
       functionName: "sellFremes",
       args: [address, ticker, amount]
     });
@@ -76,6 +79,7 @@ export const sellShares = async (data: any) => {
       method: "eth_sendTransaction",
       params: {
         abi: memecoinAbi,
+
         to: MEME_CONTRACT_ADDRESS,
         data: encodedData,
         value: Number(sellPrice).toString()

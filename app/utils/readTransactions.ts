@@ -9,6 +9,7 @@ export const getBuyPrice = async (subjectAddress: string) => {
       abi: memecoinAbi,
       functionName: "getBuyPrice",
       args: [subjectAddress, "WOFF", 1]
+
     });
 
     return response;
@@ -27,6 +28,7 @@ export const getBuyPriceAfterFee = async (
       address: MEME_CONTRACT_ADDRESS,
       abi: memecoinAbi,
       functionName: "getBuyPriceAfterFee",
+
       args: [subjectAddress, ticker, Number(amt)]
     });
 
@@ -46,7 +48,42 @@ export const getSellPriceAfterFee = async (
       address: MEME_CONTRACT_ADDRESS,
       abi: memecoinAbi,
       functionName: "getSellPriceAfterFee",
-      args: [subjectAddress, ticker, amt]
+      args: [subjectAddress, amt],
+    });
+
+    return response;
+  } catch (error) {
+    return 0;
+  }
+};
+
+export const fremesSupply = async (subjectAddress: string, ticker: string) => {
+  try {
+    const response = await publicClient.readContract({
+      address: CONTRACT_ADDRESS,
+      abi: memecoinAbi,
+      functionName: "fremesSupply",
+      args: [subjectAddress, ticker],
+    });
+
+    return response;
+  } catch (error) {
+    return 0;
+  }
+};
+
+export const fremesBalance = async (
+  subjectAddress: string,
+  ticker: string,
+  holderAddress: string
+) => {
+  try {
+    const response = await publicClient.readContract({
+      address: CONTRACT_ADDRESS,
+      abi: memecoinAbi,
+      functionName: "fremesBalance",
+      args: [subjectAddress, ticker, holderAddress],
+
     });
 
     return response;
