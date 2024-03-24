@@ -17,7 +17,7 @@ const handleRequest = frames(async (ctx) => {
   const pageIndex = Number(ctx.searchParams.pageIndex || 0);
   ctx.state.searchedUrls = [];
 
-  const imageUrl = `https://picsum.photos/seed/frames.js-${pageIndex}/300/200`;
+  console.log(ctx.state);
   const suggestions = await suggestMemes();
   const imgCompareRoute = "/creator/imgcmp";
 
@@ -25,7 +25,7 @@ const handleRequest = frames(async (ctx) => {
     image: (
       <div tw='flex flex-col'>
         {/* <img width={300} height={200} src={imageUrl} alt="Image" /> */}
-        <div tw='flex'>hello world</div>
+        <div tw="flex">pick a meme from the suggestions or search for your own</div>
       </div>
     ),
     buttons: [
@@ -33,8 +33,8 @@ const handleRequest = frames(async (ctx) => {
         key='next'
         action='post'
         target={{
-          query: { pageIndex: (pageIndex - 1) % totalPages },
-          pathname: imgCompareRoute
+          query: { meme: suggestions[0] },
+          pathname: imgCompareRoute,
         }}
       >
         {`&quot;${suggestions[0]}&quot; meme`}
@@ -43,7 +43,8 @@ const handleRequest = frames(async (ctx) => {
         key='next'
         action='post'
         target={{
-          query: { pageIndex: (pageIndex - 1) % totalPages }
+          query: { meme: suggestions[1] },
+          pathname: imgCompareRoute,
         }}
       >
         {`&quot;${suggestions[1]}&quot; meme`}
@@ -52,7 +53,8 @@ const handleRequest = frames(async (ctx) => {
         key='next'
         action='post'
         target={{
-          query: { pageIndex: (pageIndex - 1) % totalPages }
+          query: {},
+          pathname: '/'
         }}
       >
         Regenerate suggestions

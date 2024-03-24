@@ -5,7 +5,13 @@ import { processImages } from "../../../utils/processImages";
 
 const frames = createFrames({
   basePath: "/frames",
-  initialState: {}
+  initialState: {
+    memeCreatorDetails: {
+      name: "",
+      ticker: "",
+      benefactors: [] as string[],
+    }
+  },
 });
 
 const handleRequest = frames(async (ctx) => {
@@ -20,10 +26,17 @@ const handleRequest = frames(async (ctx) => {
       ? "name of meme (ex: dogwifhat)"
       : "ticker of meme(ex: WIF)";
   // only move on to the next route if the user has entered a ticker
-  const nextPathname =
-    nameSelector === "name"
-      ? "/creator/memeDetails"
-      : "/creator/revshareSelector";
+  const nextPathname = nameSelector === "name" ? "/creator/memeDetails" : "/creator/revshareSelector";
+
+  // imgcmp -> memeDetails (with only selectedUrl) -> [] memeDetails (with name selector as "ticker")
+  {/* if (nameSelector === "ticker") { */ }
+  {/*   ctx.state.memeCreatorDetails = { */ }
+  {/*     ...ctx.state.memeCreatorDetails, */ }
+  {/*     name: ctx.message?.inputText || "", */ }
+  {/*   }; */ }
+  {/*   console.log("memeCreatorDetails", ctx.state.memeCreatorDetails) */ }
+  {/* } */ }
+
 
   return {
     image: (
@@ -42,8 +55,8 @@ const handleRequest = frames(async (ctx) => {
         key='next'
         action='post'
         target={{
-          query: { selectedUrl: selectedImageUrl, nameSelector: "ticker" },
-          pathname: nextPathname
+          query: { selectedUrl: selectedImageUrl, nameSelector: "ticker", name: ctx.message?.inputText },
+          pathname: nextPathname,
         }}
       >
         next
