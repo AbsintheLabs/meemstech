@@ -24,7 +24,7 @@ const handleRequest = frames(async (ctx) => {
     image: (
       // TODO: explain how the user can add handles here and for what
       <div tw='flex flex-col w-full h-full items-center justify-center bg-black p-8 text-white'>
-        <div tw='flex text-6xl text-center text-emerald-400'>{`$[${ticker}] is live!`}</div>
+        <div tw='flex text-6xl text-center text-emerald-400'>{`$${ticker} is live!`}</div>
         <div tw='flex text-5xl text-center mt-6'>
           {" "}
           Build your lore, cast about your new freme!

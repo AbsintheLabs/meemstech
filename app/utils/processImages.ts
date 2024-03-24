@@ -21,7 +21,7 @@ export const processImages = async (imageUrls: string[]) => {
           })
           .toBuffer();
         const resizedImage = await sharp(extractedImage)
-          .resize(120, 120)
+          .resize(150, 150)
           .png()
           .toBuffer();
 

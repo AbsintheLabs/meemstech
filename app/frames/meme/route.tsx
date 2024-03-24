@@ -44,8 +44,8 @@ const handleRequest = frames(async (ctx: any) => {
               : "https://i.pinimg.com/originals/a4/f8/76/a4f87654a7f881390312402d56c8a524.jpg"
           }
           alt='meme img'
-          height={300}
-          width={300}
+          height={250}
+          width={250}
         />
       </div>
     ),
