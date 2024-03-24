@@ -53,7 +53,7 @@ const handleRequest = frames(async (ctx) => {
     if (memeMessage.startsWith("http")) {
       allSearchedImageUrls = [memeMessage];
     } else {
-      allSearchedImageUrls = await googleImageSearch(memeMessage + " meme");
+      allSearchedImageUrls = await googleImageSearch(memeMessage);
       allSearchedImageUrls = await filterImageUrls(allSearchedImageUrls);
     }
     // necessary processing step
