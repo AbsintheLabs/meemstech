@@ -81,10 +81,10 @@ const handleRequest = frames(async (ctx: any) => {
         key='next'
         action='post'
         target={{
-          pathname: "/frames"
+          pathname: "/"
         }}
       >
-        Make My Own Meme
+        Make My Own
       </Button>,
       <Button
         key='next'
