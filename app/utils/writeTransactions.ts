@@ -51,7 +51,7 @@ export const buyShares = async (data: any) => {
         abi: memecoinAbi,
         to: MEME_CONTRACT_ADDRESS,
         data: encodedData,
-        value: Number(buyPrice)
+        value: Number(buyPrice).toString()
       }
     };
   } catch (error) {
@@ -78,7 +78,7 @@ export const sellShares = async (data: any) => {
         abi: memecoinAbi,
         to: MEME_CONTRACT_ADDRESS,
         data: encodedData,
-        value: Number(sellPrice)
+        value: Number(sellPrice).toString()
       }
     };
   } catch (error) {

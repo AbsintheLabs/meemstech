@@ -7,7 +7,6 @@ const path1 = "public/meme_phrases.csv";
 const path2 = "public/public_figures.csv";
 
 async function getRandomEntryFromCSV(filePath: string) {
-  //   console.log(`Reading file: ${filePath}`);
   const fileContent = await fs.readFile(filePath, { encoding: "utf8" });
 
   if (!fileContent) {
@@ -15,7 +14,6 @@ async function getRandomEntryFromCSV(filePath: string) {
     return null;
   }
 
-  //   console.log(`File content from ${filePath}: ${fileContent}`);
   const records = fileContent.split(",").map((item: any) => item.trim());
 
   if (records.length === 0) {
@@ -23,7 +21,6 @@ async function getRandomEntryFromCSV(filePath: string) {
     return null;
   }
 
-  //   console.log(`Total records found: ${records.length}`);
   const randomIndex = Math.floor(Math.random() * records.length);
   return records[randomIndex];
 }
@@ -33,9 +30,6 @@ export async function suggestMemes() {
   const path2 = "public/public_figures.csv";
   const entry1 = await getRandomEntryFromCSV(path1);
   const entry2 = await getRandomEntryFromCSV(path2);
-
-  //   console.log("Random entry from first CSV:", entry1);
-  //   console.log("Random entry from second CSV:", entry2);
 
   return [entry1, entry2];
 }

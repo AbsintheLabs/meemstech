@@ -19,7 +19,6 @@ const handleRequest = frames(async (ctx) => {
     nameSelector === "name"
       ? "name of meme (ex: dogwifhat)"
       : "ticker of meme (ex: WIF)";
-  console.log("selectedImageUrl", selectedImageUrl);
 
   return {
     image: (

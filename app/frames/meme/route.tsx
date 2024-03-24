@@ -23,6 +23,7 @@ const handleRequest = frames(async (ctx) => {
           },
           pathname: "/buy"
         }}
+        post_url='/frames'
       >
         Buy
       </Button>,

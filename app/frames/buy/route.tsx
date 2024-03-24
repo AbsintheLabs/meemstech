@@ -1,7 +1,10 @@
 import { buyShares } from "@/app/utils/writeTransactions";
+import { TransactionTargetResponse } from "frames.js";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(req: NextRequest): Promise<NextResponse<any>> {
+export async function POST(
+  req: NextRequest
+): Promise<NextResponse<TransactionTargetResponse>> {
   try {
     const json = await req.json();
 
@@ -17,9 +20,8 @@ export async function POST(req: NextRequest): Promise<NextResponse<any>> {
       amount
     });
 
-    return NextResponse.json(tx);
+    return NextResponse.json(tx as TransactionTargetResponse);
   } catch (error) {
-    console.error(error);
-    return NextResponse.json({});
+    throw new Error("Invalid tx");
   }
 }
