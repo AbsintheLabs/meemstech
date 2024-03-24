@@ -1,7 +1,8 @@
 import { memecoinAbi } from "../abi/memecoinAbi";
 import { publicClient } from "./publicClient";
 
-const CONTRACT_ADDRESS = "0x331Fe061948E52CD96cF49E0a2fEBc4cd22a5F62";
+// const CONTRACT_ADDRESS = "0x331Fe061948E52CD96cF49E0a2fEBc4cd22a5F62";
+const CONTRACT_ADDRESS = "0xCF205808Ed36593aa40a44F10c7f7C2F67d4A4d4";
 
 export const getBuyPrice = async (subjectAddress: string) => {
   try {

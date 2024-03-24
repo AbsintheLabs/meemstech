@@ -6,7 +6,7 @@ export async function POST(req: NextRequest): Promise<NextResponse<any>> {
     const json = await req.json();
 
     const subjectAddress =
-      req.url.split("?")[1].split("&")[0].split("=")[1] ?? "0x5aC09Ca0865B5492a82460acb43ce658Ea6163D2";
+      req.url.split("?")[1].split("&")[0].split("=")[1] ?? "";
     {/* const subjectAddress = "0x5aC09Ca0865B5492a82460acb43ce658Ea6163D2" */ }
     console.log("subjectAddress", subjectAddress)
     console.log(json)
