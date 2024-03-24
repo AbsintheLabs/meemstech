@@ -60,7 +60,7 @@ const handleRequest = frames(async (ctx: any) => {
           },
           pathname: "/buy"
         }}
-        post_url={`/meme/buy?creatorAddress=${ctx.searchParams.creatorAddress}&ticker=${ctx.searchParams.ticker}`}
+        post_url={`/meme?creatorAddress=${ctx.searchParams.creatorAddress}&ticker=${ctx.searchParams.ticker}`}
       >
         Buy
       </Button>,
