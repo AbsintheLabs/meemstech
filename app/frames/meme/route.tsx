@@ -35,8 +35,11 @@ const handleRequest = frames(async (ctx: any) => {
         </div>
         <div tw='flex text-4xl mt-2'>Creator - @{values[2]?.profileName}</div>
         <div tw='flex text-4xl mt-2'>Current Supply - {Number(values[0])}</div>
-        <div tw='flex text-4xl mt-2 mb-8'>
+        <div tw='flex text-4xl mt-2'>
           Current Price - {Number(values[1]) / 10 ** 18} ETH
+        </div>
+        <div tw='flex text-2xl mt-2 mb-8'>
+          Points coming soon...
         </div>
         <img
           src={
@@ -84,18 +87,18 @@ const handleRequest = frames(async (ctx: any) => {
       <Button
         key='next'
         action='post'
-        target={{
-          pathname: "/"
-        }}
+        target={`/meme?creatorAddress=${ctx.searchParams.creatorAddress}&ticker=${ctx.searchParams.ticker}`}
       >
-        Make My Own
+        Refresh
       </Button>,
       <Button
         key='next'
         action='post'
-        target={`/meme?creatorAddress=${ctx.searchParams.creatorAddress}&ticker=${ctx.searchParams.ticker}`}
+        target={{
+          pathname: "/"
+        }}
       >
-        Points Coming Soon
+        Create My Meme
       </Button>
     ],
     textInput: "Amount you wish to buy / sell"
