@@ -80,12 +80,12 @@ const handleRequest = frames(async (ctx) => {
         <div tw='flex'>
           <img
             tw='mr-12'
-            width={200}
-            height={200}
+            width={150}
+            height={150}
             src={processedImages[0]}
             alt='Image'
           />
-          <img width={200} height={200} src={processedImages[1]} alt='Image' />
+          <img width={150} height={150} src={processedImages[1]} alt='Image' />
         </div>
         <div tw='text-6xl mt-8'>Pick the one you love</div>
       </div>
