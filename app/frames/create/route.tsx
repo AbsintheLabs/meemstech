@@ -19,7 +19,7 @@ async function launch(
     const [b64img] = await processImages([selectedUrl]);
     const address = await getAddressForFid({ fid: json.untrustedData.fid });
 
-    const key = `${address}/${ticker}`;
+    const key = `${address}/${ticker}`.toLowerCase();
     await kv.set(key, b64img);
 
     const tx = await createFreme({

@@ -21,7 +21,8 @@ const handleRequest = frames(async (ctx: any) => {
 
   const fName = fetchFName(ctx.searchParams.creatorAddress) as any;
 
-  const key = `${ctx.searchParams.creatorAddress}/${ctx.searchParams.ticker}`;
+  const key =
+    `${ctx.searchParams.creatorAddress}/${ctx.searchParams.ticker}`.toLowerCase();
   const url = kv.get(key);
 
   const values = await Promise.all([totalSupply, currentPrice, fName, url]);
