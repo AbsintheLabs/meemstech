@@ -91,10 +91,10 @@ const handleRequest = frames(async (ctx: any) => {
         action='post'
         target={{
           query: {},
-          pathname: "/memeboard"
+          pathname: ""
         }}
       >
-        MEME BOARD
+        Points Coming Soon
       </Button>
     ],
     textInput: "Amount you wish to buy / sell"
