@@ -24,6 +24,9 @@ const handleRequest = frames(async (ctx: any) => {
     benefactors: (ctx.searchParams.benefactors || "") as string
   };
 
+  // capitalize ticker
+  stateObj.ticker = (stateObj.ticker || "").toUpperCase();
+
   // given warpcast handle, get eoa address
 
   // add the inputText to the benefactors array if it's not the first time
