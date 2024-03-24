@@ -2,7 +2,6 @@ import { fetchFName } from "@/app/utils/fetchFollowers";
 import { fremesSupply, getBuyPrice } from "@/app/utils/readTransactions";
 import { kv } from "@vercel/kv";
 import { createFrames, Button } from "frames.js/next";
-import Image from "next/image";
 
 const frames = createFrames({
   basePath: "/frames",
@@ -40,7 +39,9 @@ const handleRequest = frames(async (ctx: any) => {
         </div>
         <img
           src={
-            "https://i.pinimg.com/originals/a4/f8/76/a4f87654a7f881390312402d56c8a524.jpg"
+            typeof values[3] === "string"
+              ? values[3]
+              : "https://i.pinimg.com/originals/a4/f8/76/a4f87654a7f881390312402d56c8a524.jpg"
           }
           alt='meme img'
           height={300}
