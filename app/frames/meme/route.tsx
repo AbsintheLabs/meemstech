@@ -20,6 +20,7 @@ const handleRequest = frames(async (ctx) => {
           query: { address: ctx.searchParams.token },
           pathname: "/buy"
         }}
+        post_url='/frames'
       >
         Buy
       </Button>,
