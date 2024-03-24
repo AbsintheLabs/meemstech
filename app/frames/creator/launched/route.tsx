@@ -29,6 +29,10 @@ const handleRequest = frames(async (ctx) => {
           {" "}
           Build your lore, cast about your new freme!
         </div>
+        <div tw='flex text-4xl text-center mt-6' >
+          {" "}
+          Don&apos; worry if you get a 404. Just copy the link anyway and repost it
+        </div>
       </div>
     ),
     buttons: [
