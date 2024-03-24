@@ -93,6 +93,7 @@ const handleRequest = frames(async (ctx: any) => {
       <Button
         key='next'
         action='post'
+        target={`/meme?creatorAddress=${ctx.searchParams.creatorAddress}&ticker=${ctx.searchParams.ticker}`}
       >
         Points Coming Soon
       </Button>
