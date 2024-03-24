@@ -65,9 +65,10 @@ const handleRequest = frames(async (ctx) => {
           query: { ...stateObj },
           pathname: "/create"
         }}
+        post_url={`/creator/launched?ticker=${stateObj.ticker}`}
       >
         Launch Meme
-      </Button>
+      </Button >
     ],
     textInput: "add handle here (vitalik.eth)"
   };

@@ -10,38 +10,25 @@ const frames = createFrames({
 
 const handleRequest = frames(async (ctx) => {
   // TODO: create something that will autogenerate this
-  const launchedLink = "https://meems.tech/@absinthe/WIF";
-
-  // --------- OLD BELOW ------------
-  // image url that will be displayed
-  const selectedImageUrl = ctx.searchParams.selectedUrl || "";
-  // when set to "name", it will make you pick the name. when set to "ticker", it will make you pick the ticker
-  const nameSelector = ctx.searchParams.nameSelector || "name";
-  // process images to make it square and compatible with frames
-  const [processedImageUrl] = await processImages([selectedImageUrl]);
-  const textPrompt =
-    nameSelector === "name"
-      ? "name of meme (ex: dogwifhat)"
-      : "ticker of meme (ex: WIF)";
-
-
+  const json = await ctx.request.json();
+  const address = json.untrustedData.address;
+  const ticker = ctx.searchParams.ticker;
+  const launchedLink = `https://fremes.wtf/meme/creatorAddress=${address}&ticker=${ticker}`
 
   return {
     image: (
       // TODO: explain how the user can add handles here and for what
       <div tw='flex flex-col'>
-        <img width={220} height={220} src={processedImageUrl} alt='Image' />
+        {/* <img width={220} height={220} src={} alt='Image' /> */}
         <div tw='flex'>launched screen</div>
+        <div tw='flex'>click on the link. copy the url in the url bar. and paste it into a new warp!</div>
       </div>
     ),
     buttons: [
       <Button
         key='next'
         action='link'
-        target={{
-          query: {},
-          href: launchedLink
-        }}
+        target={launchedLink}
       >
         Repost the warp! 🚀
       </Button>

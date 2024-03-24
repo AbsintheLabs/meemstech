@@ -1,19 +1,23 @@
 import { buyShares, createFreme } from "@/app/utils/writeTransactions";
 import { NextRequest, NextResponse } from "next/server";
 import { kv } from "@vercel/kv";
+import { processImages } from "../../utils/processImages";
 
 export async function POST(req: NextRequest): Promise<NextResponse<any>> {
   try {
-    // const json = await req.json();
+    const json = await req.json();
 
     const url = new URL(req.url);
     const ticker = url.searchParams.get("ticker");
+    const selectedUrl = url.searchParams.get("selectedUrl") ?? "";
     const benefactors = url.searchParams.get("benefactors")?.split(",") ?? [];
 
     console.log(ticker, benefactors);
 
-    const key = `${address}/${ticker}`;
-    await kv.set(key, processedImageUrl);
+    const [b64img] = await processImages([selectedUrl]);
+
+    const key = `${json.untrustedData.address}/${ticker}`;
+    await kv.set(key, b64img);
 
     const tx = await createFreme({
       ticker,
